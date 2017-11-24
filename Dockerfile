@@ -114,6 +114,9 @@ RUN cd /usr/local/src && \
 # =================================
 # lightgbm + gpu
 # =================================
+RUN apt-get upgrade -y libboost-dev \
+        libboost-system-dev \
+        libboost-filesystem-dev
 RUN mkdir -p /etc/OpenCL/vendors && \
     echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
 RUN cd /usr/local/src && mkdir lightgbm && cd lightgbm && \
