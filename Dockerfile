@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM nvidia/cuda:8.0-cudnn6-devel
 MAINTAINER Zequn <lzq910123@gmail.com>
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
@@ -33,15 +33,16 @@ ENV OPENCL_INCLUDE_DIR /usr/local/cuda/include
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-		build-essential \
-		gcc \
-		g++\
-		cmake\
+        build-essential \
+        gcc \
+        g++\
+        cmake\
         curl \
         git \
+        vim\
         mercurial \
-		subversion \
-		vim \
+        subversion \
+        vim \
         libcurl3-dev \
         libfreetype6-dev \
         libpng12-dev \
@@ -51,8 +52,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libsm6 \
         libxrender1\
         libboost-dev \
-		libboost-system-dev \
-		libboost-filesystem-dev \
+        libboost-system-dev \
+        libboost-filesystem-dev \
         pkg-config \
         rsync \
         software-properties-common \
@@ -64,10 +65,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         wget \
         bzip2\
         ca-certificates \
-        libblkid-dev \
-        e2fslibs-dev \
         libboost-all-dev \
-        libaudit-dev \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
