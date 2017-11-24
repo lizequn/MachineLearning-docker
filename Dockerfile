@@ -109,6 +109,9 @@ RUN cd /usr/local/src && \
   cmake --DUSE_CUDA=ON .. && \
   make -j
 
+RUN cd /usr/local/src/xgboost/python-package && \
+  python setup.py install 
+
 
 # =================================
 # lightgbm + gpu
