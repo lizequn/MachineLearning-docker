@@ -83,7 +83,6 @@ RUN pip install --upgrade pip
 COPY jupyter_notebook_config.py /root/.jupyter/
 EXPOSE 8888
 
-RUN conda install --quiet --yes gcc
 
 # =================================
 # Tensorflow&keras
