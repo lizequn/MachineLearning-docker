@@ -143,6 +143,6 @@ RUN apt-get autoremove -y && apt-get clean && \
 # settings
 # =================================
 RUN mkdir /notebook
-ENTRYPOINT ["tini", "--"]
+ENTRYPOINT ["/tini", "--"]
 CMD ["jupyter", "notebook", "--no-browser", "--allow-root"]
 WORKDIR /notebook
