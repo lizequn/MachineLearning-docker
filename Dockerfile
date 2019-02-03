@@ -171,9 +171,12 @@ RUN /bin/bash -c "cd /usr/local/src/lightgbm/LightGBM/python-package && python s
 # tini
 # =================================
 
-ENV TINI_VERSION v0.16.1
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
+RUN apt-get install -y curl grep sed dpkg && \
+    TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
+    curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
+    dpkg -i tini.deb && \
+    rm tini.deb && \
+    apt-get clean
 # =================================
 # clean
 # =================================
@@ -186,6 +189,6 @@ RUN apt-get autoremove -y && apt-get clean && \
 # settings
 # =================================
 RUN mkdir /notebook
-ENTRYPOINT ["/tini", "--"]
+ENTRYPOINT [ "/usr/bin/tini", "--" ]
 CMD ["jupyter", "notebook", "--no-browser", "--allow-root"]
 WORKDIR /notebook
