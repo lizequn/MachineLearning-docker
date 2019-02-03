@@ -141,19 +141,13 @@ EXPOSE 6006
 # =================================
 
 RUN conda install -y -c pytorch \
-    cuda100=1.0 \
-    magma-cuda100=2.4.0 \
-    "pytorch=1.0.0=py3.6_cuda10.0.130_cudnn7.4.1_1" \
-    torchvision=0.2.1 \
+    pytorch \
+    torchvision \
+    cuda100 \
  && conda clean -ya
-
-#HDF5 Python bindings
-RUN conda install -y h5py=2.8.0 \
- && conda clean -ya
-RUN pip install h5py-cache==1.0
 
 # Install Torchnet
-RUN pip install torchnet==0.0.4
+RUN pip install torchnet
 
 # =================================
 # Xgboost + gpu
