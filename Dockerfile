@@ -140,22 +140,20 @@ EXPOSE 6006
 # Pytorch
 # =================================
 
-RUN conda install -y -c pytorch magma-cuda100 && \
-    conda clean -ya
+RUN conda install -y -c pytorch \
+    cuda100=1.0 \
+    magma-cuda100=2.4.0 \
+    "pytorch=1.0.0=py3.6_cuda10.0.130_cudnn7.4.1_1" \
+    torchvision=0.2.1 \
+ && conda clean -ya
 
-RUN pip install ninja
-WORKDIR /opt/pytorch
-COPY . .
+#HDF5 Python bindings
+RUN conda install -y h5py=2.8.0 \
+ && conda clean -ya
+RUN pip install h5py-cache==1.0
 
-RUN git submodule update --init
-RUN TORCH_CUDA_ARCH_LIST="3.5 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
-    CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
-    pip install -v .
-
-RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install -v .
-
-WORKDIR /workspace
-RUN chmod -R a+w /workspace
+# Install Torchnet
+RUN pip install torchnet==0.0.4
 
 # =================================
 # Xgboost + gpu
