@@ -139,8 +139,6 @@ EXPOSE 6006
 
 RUN pip --no-cache-dir install keras
 
-COPY bashrc /etc/bash.bashrc
-RUN chmod a+rwx /etc/bash.bashrc
 # =================================
 # Pytorch
 # =================================
