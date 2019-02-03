@@ -5,10 +5,10 @@
 # python        3.6
 # anaconda      5.2.0
 # ---------------------------------
-# Xgboost       0.6(gpu)
+# Xgboost       latest(gpu)
 # lightgbm      2.0.10(gpu)
 # ---------------------------------
-# tensorflow    1.4.0 (pip)
+# tensorflow    latest (pip)
 # pytorch       latest  (pip)
 # keras         latest (pip)
 # ---------------------------------
