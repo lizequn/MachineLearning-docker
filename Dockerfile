@@ -2,8 +2,8 @@
 # cuda          10.0
 # cudnn         v7
 # ---------------------------------
-# python        3.7
-# anaconda      2018.12
+# python        3.6
+# anaconda      5.2.0
 # ---------------------------------
 # Xgboost       0.6(gpu)
 # lightgbm      2.0.10(gpu)
@@ -56,6 +56,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         vim \
         libcurl3-dev \
         libfreetype6-dev \
+        libjpeg-dev \
+        libpng-dev \
         libpng12-dev \
         libzmq3-dev \
         libglib2.0-0 \
@@ -110,7 +112,7 @@ RUN apt-get update && \
 # Anaconda
 # =================================
 ENV PATH /opt/conda/bin:$PATH
-RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh -O ~/anaconda.sh && \
+RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
@@ -118,6 +120,7 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_6
     echo "conda activate base" >> ~/.bashrc
 
 RUN pip install --upgrade pip
+
 # set up jupyter notebook
 COPY jupyter_notebook_config.py /root/.jupyter/
 EXPOSE 8888
@@ -136,7 +139,23 @@ EXPOSE 6006
 # =================================
 # Pytorch
 # =================================
-RUN conda install --quiet --yes pytorch torchvision cuda80 -c soumith
+
+RUN conda install -y -c pytorch magma-cuda100 && \
+    conda clean -ya
+
+RUN pip install ninja
+WORKDIR /opt/pytorch
+COPY . .
+
+RUN git submodule update --init
+RUN TORCH_CUDA_ARCH_LIST="3.5 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
+    CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
+    pip install -v .
+
+RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install -v .
+
+WORKDIR /workspace
+RUN chmod -R a+w /workspace
 
 # =================================
 # Xgboost + gpu
