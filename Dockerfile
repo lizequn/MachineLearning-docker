@@ -25,8 +25,8 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 
 ENV CUDA_HOME /usr/local/cuda
-ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${CUDA_HOME}/lib64
-ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/usr/local/lib
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$CUDA_HOME/lib64
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/lib
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
 ENV CI_BUILD_PYTHON python
@@ -88,24 +88,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # =================================
 RUN apt-get update && apt-get install -y --no-install-recommends \
         cuda-command-line-tools-10-0 \
-        cuda-cublas-dev-10-0 \
-        cuda-cudart-dev-10-0 \
-        cuda-cufft-dev-10-0 \
-        cuda-curand-dev-10-0 \
-        cuda-cusolver-dev-10-0 \
-        cuda-cusparse-dev-10-0 \
+        cuda-cublas-10-0 \
+        cuda-cufft-10-0 \
+        cuda-curand-10-0 \
+        cuda-cusolver-10-0 \
+        cuda-cusparse-10-0 \
         libcudnn7=7.4.1.5-1+cuda10.0 \
-        libcudnn7-dev=7.4.1.5-1+cuda10.0 \
+        libfreetype6-dev \
         libhdf5-serial-dev \
+        libpng12-dev \
         libzmq3-dev \
-        && \
-    find /usr/local/cuda-10.0/lib64/ -type f -name 'lib*_static.a' -not -name 'libcudart_static.a' -delete && \
-    rm /usr/lib/x86_64-linux-gnu/libcudnn_static_v7.a
+        pkg-config \
+        software-properties-common \
+        unzip
 
 RUN apt-get update && \
         apt-get install nvinfer-runtime-trt-repo-ubuntu1604-5.0.2-ga-cuda10.0 \
         && apt-get update \
-        && apt-get install -y --no-install-recommends libnvinfer-dev=5.0.2-1+cuda10.0 \
+        && apt-get install -y --no-install-recommends libnvinfer5=5.0.2-1+cuda10.0 \
+        && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
 # =================================
@@ -136,6 +137,10 @@ ARG TF_PACKAGE=tensorflow-gpu
 RUN pip --no-cache-dir install ${TF_PACKAGE}
 EXPOSE 6006
 
+RUN pip --no-cache-dir install keras
+
+COPY bashrc /etc/bash.bashrc
+RUN chmod a+rwx /etc/bash.bashrc
 # =================================
 # Pytorch
 # =================================
