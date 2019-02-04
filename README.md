@@ -5,13 +5,13 @@ ML GPU docker
 
 - cuda          10.0           
 - cudnn         v7             
-- python        3.7            
-- anaconda      2018.12          
-- Xgboost       0.6(gpu)       
-- lightgbm      2.0.10(gpu)   
-- tensorflow    1.4.0(pip)    
+- python        3.6            
+- anaconda      5.2.0         
+- Xgboost       latest(gpu)       
+- lightgbm      latest(gpu)   
+- tensorflow    latest(pip)    
 - pytorch       latest(pip)  
-- keras         included in Tensorflow
+
 
 -----------------------
 - install docker env

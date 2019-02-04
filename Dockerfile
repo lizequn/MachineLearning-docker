@@ -6,7 +6,7 @@
 # anaconda      5.2.0
 # ---------------------------------
 # Xgboost       latest(gpu)
-# lightgbm      2.0.10(gpu)
+# lightgbm      latest(gpu)
 # ---------------------------------
 # tensorflow    latest (pip)
 # pytorch       latest  (pip)
