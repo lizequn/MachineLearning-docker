@@ -1,4 +1,6 @@
 # ML-GPU-docker
+----------------------
+[Doc](https://lizequn.github.io/2019/02/03/GPU-supported-Machine-Learning-docker/)
 
 ----------------------
 ML GPU docker
@@ -6,12 +8,15 @@ ML GPU docker
 - cuda          10.0           
 - cudnn         v7             
 - python        3.6            
-- anaconda      5.2.0         
+- anaconda      5.2.0 
+- Jupyter Notebook @:8008        
 - Xgboost       latest(gpu)       
 - lightgbm      latest(gpu)   
-- tensorflow    latest(pip)    
-- pytorch       latest(pip)  
-
+- tensorflow    1.13.0rc0(pip) 
+- tensorboard   latest (pip) @:6006   
+- pytorch       latest(pip) 
+- torchvision   latest (pip) 
+- keras         latest (pip)
 
 -----------------------
 - install docker env

@@ -4,16 +4,19 @@
 # ---------------------------------
 # python        3.6
 # anaconda      5.2.0
+# Jupyter Notebook @:8008  
 # ---------------------------------
 # Xgboost       latest(gpu)
 # lightgbm      latest(gpu)
 # ---------------------------------
-# tensorflow    latest (pip)
-# pytorch       latest  (pip)
+# tensorflow    1.13.0rc0 (pip)
+# tensorboard   latest (pip) @:6006
+# pytorch       latest (pip)
+# torchvision   latest (pip)
 # keras         latest (pip)
 # ---------------------------------
-ARG UBUNTU_VERSION=16.04
-FROM nvidia/cuda:10.0-base-ubuntu${UBUNTU_VERSION} as base
+
+FROM nvidia/cuda:10.0-base-ubuntu16.04 as base
 LABEL maintainer="lzq910123@gmail.com"
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
@@ -149,8 +152,7 @@ RUN conda install -y -c pytorch \
     cuda100 \
  && conda clean -ya
 
-# Install Torchnet
-RUN pip install torchnet
+
 
 # =================================
 # Xgboost + gpu
