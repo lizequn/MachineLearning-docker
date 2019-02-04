@@ -133,7 +133,7 @@ EXPOSE 8888
 # Options:
 #   tensorflow-gpu
 #   tf-nightly-gpu
-ARG TF_PACKAGE=tensorflow-gpu
+ARG TF_PACKAGE=tf-nightly-gpu
 RUN pip --no-cache-dir install ${TF_PACKAGE}
 EXPOSE 6006
 
