@@ -1,4 +1,4 @@
-# ML-GPU-docker
+# MachineLearning-docker
 ----------------------
 [Doc](https://lizequn.github.io/2019/02/03/GPU-supported-Machine-Learning-docker/)
 
