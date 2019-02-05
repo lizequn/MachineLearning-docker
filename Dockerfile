@@ -136,8 +136,7 @@ EXPOSE 8888
 # Options:
 #   tensorflow-gpu
 #   tf-nightly-gpu
-ARG TF_PACKAGE=tf-nightly-gpu
-RUN pip --no-cache-dir install ${TF_PACKAGE}
+RUN pip --no-cache-dir install http://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.13.0rc0-cp36-cp36m-linux_x86_64.whl 
 EXPOSE 6006
 
 RUN pip --no-cache-dir install keras
