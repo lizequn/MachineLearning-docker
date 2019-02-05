@@ -5,6 +5,7 @@
 # python        3.6
 # anaconda      5.2.0
 # Jupyter Notebook @:8008  
+# AwS api       boto3(pip)
 # ---------------------------------
 # Xgboost       latest(gpu)
 # lightgbm      latest(gpu)
@@ -31,13 +32,6 @@ ENV CUDA_HOME /usr/local/cuda
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$CUDA_HOME/lib64
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/lib
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
-
-ENV CI_BUILD_PYTHON python
-ENV TF_NEED_CUDA 1
-ENV TF_NEED_TENSORRT 1
-ENV TF_CUDA_COMPUTE_CAPABILITIES=3.5,5.2,6.0,6.1,7.0
-ENV TF_CUDA_VERSION=10.0
-ENV TF_CUDNN_VERSION=7
 
 ENV OPENCL_LIBRARIES /usr/local/cuda/lib64
 ENV OPENCL_INCLUDE_DIR /usr/local/cuda/include
@@ -129,6 +123,10 @@ RUN pip install --upgrade pip
 COPY jupyter_notebook_config.py /root/.jupyter/
 EXPOSE 8888
 
+# =================================
+# AWS api
+# =================================
+RUN pip --no-cache-dir install boto3
 
 # =================================
 # Tensorflow & keras
