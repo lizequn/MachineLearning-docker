@@ -3,7 +3,7 @@
 [Doc](https://lizequn.github.io/2019/02/03/GPU-supported-Machine-Learning-docker/)
 
 ----------------------
-###GPU docker
+### GPU docker
 
 - cuda          10.0           
 - cudnn         v7             
@@ -19,7 +19,7 @@
 - keras         latest (pip)
 
 -----------------------
-###CPU docker
+### CPU docker
 -python        3.6
 -anaconda      5.2.0
 -Jupyter Notebook @:8888  
