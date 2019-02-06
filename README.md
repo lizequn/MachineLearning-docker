@@ -20,6 +20,7 @@
 
 -----------------------
 ### CPU docker
+
 -python        3.6
 -anaconda      5.2.0
 -Jupyter Notebook @:8888  
