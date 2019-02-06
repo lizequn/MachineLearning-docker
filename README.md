@@ -21,12 +21,12 @@
 -----------------------
 ### CPU docker
 
--python        3.6
--anaconda      5.2.0
--Jupyter Notebook @:8888  
--AwS api       boto3(pip)
--Xgboost       latest(pip)
--lightgbm      latest
+- python        3.6
+- anaconda      5.2.0
+- Jupyter Notebook @:8888  
+- AwS api       boto3(pip)
+- Xgboost       latest(pip)
+- lightgbm      latest
 
 -----------------------
 
